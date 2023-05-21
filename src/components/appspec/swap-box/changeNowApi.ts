@@ -62,7 +62,7 @@ export const getEstimatedRangeFixedRate = async (from_to: String): Promise<Axios
 
 //create fixed rate exchange
 //The API endpoint creates a transaction, generates an address for sending funds and returns transaction attributes.
-//successful response fields: {id, payinAddress, payoutAddress, payoutExtrald, fromCurrency, toCurrency, result, refundAddress, refundExtrald, payoutExtraldName, validUntil, rateId}
+//successful response fields: {id, payinAddress, payoutAddress, payoutExtrald, fromCurrency, toCurrency, amount, refundAddress, refundExtrald, payoutExtraldName, validUntil, rateId}
 /**
  * 
  * @param requestObj
@@ -80,9 +80,9 @@ export const getEstimatedRangeFixedRate = async (from_to: String): Promise<Axios
      "contactEmail": ""
 }
  */
-export const createFixedRateExchange = async (from_to: String, requestObj: Object): Promise<AxiosResponse<any>> => {
+export const createFixedRateExchange = async (requestObj: Object): Promise<AxiosResponse<any>> => {
     const apiKey = personInfo.apiKey;
-    const apiUrl = `https://api.changenow.io/v1/exchange-range/fixed-rate/${from_to}?api_key=${apiKey}&useRateId=true`;
+    const apiUrl = `https://api.changenow.io/v1/transactions/fixed-rate/${apiKey}`;
 
     try {
         const response = await axios.post(apiUrl, {
@@ -98,13 +98,30 @@ export const createFixedRateExchange = async (from_to: String, requestObj: Objec
 //create fixed rate exchange reverse
 //The API endpoint creates a transaction, generates an address for sending funds and returns transaction attributes.
 //successful response fields: {}
-
-export const createReverseFixedRateExchange  = async (from_to: String): Promise<AxiosResponse<any>> => {
+/**
+ * required request fields: 
+ * {
+     "from": "btc",
+     "to": "xlm",
+     "address": "GAM6Y7R5LKBYOC5VCF3L3B24EMM2IA5S7KTWTR65G65N7BJQRV32OGFB",
+     "amount": "12.0645",
+     "extraId": "123456789",
+     "refundAddress": "1Nh7uHdvY6fNwtQtM1G5EZAFPLC33B59rB",
+     "refundExtraId": "",
+     "userId": "",
+     "payload": "",
+     "contactEmail": ""
+}
+ * 
+*/
+export const createReverseFixedRateExchange  = async (requestObj: Object): Promise<AxiosResponse<any>> => {
     const apiKey = personInfo.apiKey;
-    const apiUrl = `https://api.changenow.io/v1/exchange-range/fixed-rate/${from_to}?api_key=${apiKey}&useRateId=true`;
+    const apiUrl = `https://api.changenow.io/v1/transactions/fixed-rate/from-result/${apiKey}`;
 
     try {
-        const response = await axios.get(apiUrl)
+        const response = await axios.post(apiUrl, {
+            ...requestObj
+        })
         return response;
     } catch (error: any) {
         throw new Error(`Error fetching currencies: ${error.message}`);
