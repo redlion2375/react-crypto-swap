@@ -36,7 +36,7 @@ export const getEstimatedFixedRateExchangeAmount = async (send_amount: String, f
 //successful response fields: {estimatedDeposit, rateID}
 export const getEstimatedFixedRateExchangeAmountReverse = async (send_amount: String, from_to: String): Promise<AxiosResponse<any>> => {
     const apiKey = personInfo.apiKey;
-    const apiUrl = `https://api.changenow.io/v1/exchange-deposit/fixed-rate/${send_amount}/${from_to}?api_key=your_api_key&useRateId=true`;
+    const apiUrl = `https://api.changenow.io/v1/exchange-deposit/fixed-rate/${send_amount}/${from_to}?api_key=${apiKey}&useRateId=true`;
 
     try {
         const response = await axios.get(apiUrl);
@@ -50,7 +50,7 @@ export const getEstimatedFixedRateExchangeAmountReverse = async (send_amount: St
 //successful response fields: {minAmount, maxAmount}
 export const getEstimatedRangeFixedRate = async (from_to: String): Promise<AxiosResponse<any>> => {
     const apiKey = personInfo.apiKey;
-    const apiUrl = `https://api.changenow.io/v1/exchange-range/fixed-rate/${from_to}?api_key=your_api_key&useRateId=true`;
+    const apiUrl = `https://api.changenow.io/v1/exchange-range/fixed-rate/${from_to}?api_key=${apiKey}&useRateId=true`;
 
     try {
         const response = await axios.get(apiUrl)
