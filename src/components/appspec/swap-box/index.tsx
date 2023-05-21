@@ -12,3 +12,19 @@
  * UI - A user sends coins, ChangeNOW performs an exchange and makes a withdrawal to user address (in our example, to their ETH address);
  * API - With 'Transaction status' you can get the transaction status and display it to a user for them to obtain all the info on the exchange.
  */
+
+import { useState, useEffect } from 'react';
+import * as ChangeNOWAPIPack from './changeNowApi';
+
+const SwapForm = () => {
+    const availableApis = useState(null);
+    console.log(ChangeNOWAPIPack.getAvailableFixedRateMarkets());
+
+    return (
+        <div>
+            <h1>Hello, Ishihara</h1>
+        </div>
+    );
+}
+
+export default SwapForm;
