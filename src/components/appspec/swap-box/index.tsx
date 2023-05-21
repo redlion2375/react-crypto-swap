@@ -15,14 +15,14 @@
 
 import { useState, useEffect } from 'react';
 import * as ChangeNOWAPIPack from './changeNowApi';
+import './swap-form-style.css';
 
 const SwapForm = () => {
-    const availableApis = useState(null);
-    console.log(ChangeNOWAPIPack.getAvailableFixedRateMarkets());
+    console.log(ChangeNOWAPIPack.getAvailableCurrencies());
 
     return (
         <div>
-            <h1>Hello, Ishihara</h1>
+            <h1>Good Day!</h1>
         </div>
     );
 }
