@@ -46,18 +46,17 @@ export const getEstimatedFixedRateExchangeAmountReverse = async (send_amount: St
     }
 }
 
-//change crypto(this is fixed-rate)
-export const changeCrypto = async (transaction_id: String): Promise<AxiosResponse<any>> => {
+//The API endpoint returns minimal payment amount and maximum payment amount required to make an exchange. If you try to exchange less than minimum or more than maximum, the transaction will most likely fail. Any pair of assets has minimum amount and some of pairs have maximum amount.
+//successful response fields: {minAmount, maxAmount}
+export const changeCrypto = async (from_to: String): Promise<AxiosResponse<any>> => {
     const apiKey = personInfo.apiKey;
-    const apiUrl = `https://api.changenow.io/v1/transactions/fixed-rate/${ apiKey }`;
+    const apiUrl = `https://api.changenow.io/v1/exchange-range/fixed-rate/${from_to}?api_key=your_api_key&useRateId=true`;
 
     try {
-        const response = await axios.post(apiUrl, {
-            api_key: apiKey,
-            active: true
-        })
+        const response = await axios.get(apiUrl)
         return response;
     } catch (error: any) {
         throw new Error(`Error fetching currencies: ${error.message}`);
     }
 }
+
