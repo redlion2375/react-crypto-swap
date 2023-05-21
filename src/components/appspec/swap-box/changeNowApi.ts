@@ -1,7 +1,56 @@
 import axios, { AxiosResponse } from 'axios';
 import { personInfo } from '../constant/sensd';
 
-//fetches full list of available fixed rate
+//fetches list of available currencies by fixed rate
+export const getAvailableCurrencies = async (): Promise<AxiosResponse<any>> => {
+    const apiUrl = `https://api.changenow.io/v1/currencies?active=true&fixedRate=true`;
+
+    try {
+        const response = await axios.get(apiUrl);
+        return response;
+    } catch (error: any) {
+        throw new Error(`Error fetching currencies: ${error.message}`);
+    }
+}
+
+//fetches list of available currencies to a specific one
+export const getAvailableCurrenciesTo = async (ticker: String): Promise<AxiosResponse<any>> => {
+    const apiUrl = `https://api.changenow.io/v1/currencies-to/${ ticker }?fixedRate=true`;
+
+    try {
+        const response = await axios.get(apiUrl);
+        return response;
+    } catch (error: any) {
+        throw new Error(`Error fetching currencies: ${error.message}`);
+    }
+}
+
+//fetches info for a specific coin/token which is passed as a parameter.
+export const getInfoOf = async (ticker: String) => {
+    const apiUrl = `https://api.changenow.io/v1/currencies/${ ticker }`;
+
+    try {
+        const response = await axios.get(apiUrl);
+        return response;
+    } catch (error: any) {
+        throw new Error(`Error fetching currencies: ${ error.message }`);
+    }
+}
+
+//fetches user transaction history
+export const getTransactionHistory = async (from: String, to: String, dateFrom: String, dateTo: String) => {
+    const apiKey = personInfo.apiKey;
+    const apiUrl = `https://api.changenow.io/v1/transactions/${ apiKey }?from=${ from }&to=${ to }&status=waiting&limit=50&offset=0&${dateFrom}&${dateTo}`;
+
+    try {
+        const response = await axios.get(apiUrl);
+        return response;
+    } catch (error: any) {
+        throw new Error(`Error fetching currencies: ${ error.message }`);
+    }
+}
+
+//fetches full list of market info with fixed rate
 //successful response's fields: {from, to, min, max, rate, minerFee}
 export const getAvailableFixedRateMarkets = async (): Promise<AxiosResponse<any>> => {
     const apiKey = personInfo.apiKey;
