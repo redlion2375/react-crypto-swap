@@ -50,6 +50,19 @@ export const getTransactionHistory = async (from: String, to: String, dateFrom: 
     }
 }
 
+//checks transaction status
+export const checkTransactionStatus = async (tranID: String) => {
+    const apiKey = personInfo.apiKey;
+    const apiUrl = `https://api.changenow.io/v1/transactions/${ tranID }/${apiKey}`;
+
+    try {
+        const response = await axios.get(apiUrl);
+        return response;
+    } catch (error: any) {
+        throw new Error(`Error fetching currencies: ${ error.message }`);
+    }
+}
+
 //fetches full list of market info with fixed rate
 //successful response's fields: {from, to, min, max, rate, minerFee}
 export const getAvailableFixedRateMarkets = async (): Promise<AxiosResponse<any>> => {
