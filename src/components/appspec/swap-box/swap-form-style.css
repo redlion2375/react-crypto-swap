@@ -1,14 +1,14 @@
 .swap-widget {
-    width: 500px;
-    height: 300px;
+    width: 600px;
+    height: 400px;
     border: 3px solid gray;
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 5;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     color: white;
 }
 
@@ -21,6 +21,7 @@
     display: block;
     margin-bottom: 30px;
     border-radius: 10px;
+    font-size: 25px;
 }
 
 .swap-widget input:disabled {
