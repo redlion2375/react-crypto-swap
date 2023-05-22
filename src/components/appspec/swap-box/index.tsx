@@ -16,13 +16,27 @@
 import { useState, useEffect } from 'react';
 import * as ChangeNOWAPIPack from './changeNowApi';
 import './swap-form-style.css';
+import swap_btn_img from '../../../assets/images/swap3.webp';
 
 const SwapForm = () => {
-    console.log(ChangeNOWAPIPack.getAvailableCurrencies());
-
+    const [availableCurrencies, setAvailableCurrencies] = useState(null);
+    useEffect(() => {
+        const fetchCurrencies = async () => {
+            const data = await ChangeNOWAPIPack.getAvailableCurrencies();
+            console.log(data.data);
+            setAvailableCurrencies(data.data);
+        }
+        fetchCurrencies();
+    }, []);
     return (
-        <div>
-            <h1>Good Day!</h1>
+        <div className={"swap-widget"}>
+            <h1>Cryptocurrency Exchange</h1>
+            <input type='number' className={"sending-amount"} />
+            <input type='number' className="receiving-amount" disabled />
+            <button className='swap-btn'>
+                <img src={swap_btn_img} className='swap-btn-img' />
+                <span>Swap</span>
+            </button>
         </div>
     );
 }
