@@ -1,0 +1,50 @@
+.swap-widget {
+    width: 500px;
+    height: 300px;
+    border: 3px solid gray;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 5;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.swap-widget input {
+    border: none;
+    outline: none;
+    width: 300px;
+    height: 50px;
+    margin: auto;
+    display: block;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.swap-widget input:disabled {
+    background-color: white;
+}
+
+.swap-widget .swap-btn {
+    width: 120px;
+    height: 40px;
+    font-size: 25px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: 1s;
+}
+
+.swap-widget .swap-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+.swap-widget .swap-btn-img {
+    width: 30px;
+    height: 30px;
+    margin: 0px;
+    float: left;
+}
